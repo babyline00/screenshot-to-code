@@ -1,0 +1,26 @@
+// Screenshot to Code Converter — Prisma schema
+// SQLite is used as the local-first store. Each row is one screenshot-to-code
+// conversion. The screenshot itself is persisted on disk under public/uploads/
+// and referenced by relative path; the generated + user-edited JSX code live
+// in the row so the user can revisit and re-edit any past conversion.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Conversion {
+  id             String   @id @default(cuid())
+  screenshotPath String   // relative path under public/ (e.g. "uploads/abc-123.png")
+  prompt         String   // the system prompt that was sent to the vision LLM
+  generatedCode  String   // raw LLM output, after cleaning markdown fences
+  editedCode     String?  // user-edited version (null until first edit)
+  componentName  String   @default("GeneratedComponent")
+  model          String   @default("gpt-4o")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

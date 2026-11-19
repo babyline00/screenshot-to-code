@@ -1,0 +1,40 @@
+# dependencies
+node_modules/
+bun.lock
+
+# next.js
+.next/
+out/
+build/
+.vercel/
+
+# env / local config
+.env
+.env.local
+.env.*.local
+
+# prisma / sqlite db
+db/
+*.db
+*.db-journal
+*.sqlite
+
+# logs
+dev.log
+server.log
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/*
+
+# test artifacts
+coverage/
+tmp/
+
+# next-env (regenerated on build)
+next-env.d.ts
+
+# uploads (kept in repo for demo? no — ignore to keep the repo light)
+public/uploads/
